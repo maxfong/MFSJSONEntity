@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "MFSJSONEntityElementProtocol.h"
 
-@interface NSObject (JSONEntity)
+@interface NSObject (JSONEntity) <MFSJSONEntityElementProtocol>
 
 /** 获取当前对象的属性集合 */
 - (NSDictionary *)propertyDictionary;
 /** 根据数据集合生成对象 */
-+ (id<MFSJSONEntityElementProtocol>)objectWithDictionary:(NSDictionary *)dictionary;
++ (id)objectWithDictionary:(NSDictionary *)dictionary;
++ (id)objectWithArray:(NSArray *)array;
 
 /** 获取类属性列表，不包含父类 */
 + (NSArray *)propertyNames;

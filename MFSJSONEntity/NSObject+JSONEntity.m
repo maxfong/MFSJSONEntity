@@ -11,19 +11,39 @@
 
 @implementation NSObject (JSONEntity)
 
-- (NSDictionary *)propertyDictionary {
+- (NSDictionary *)propertyDictionary
+{
     return [self mfs_propertyDictionary];
 }
 
-+ (id)objectWithDictionary:(NSDictionary *)dictionary {
++ (id)objectWithDictionary:(NSDictionary *)dictionary
+{
     return [self mfs_objectWithDictionary:dictionary];
 }
 
-+ (NSArray *)propertyNames {
++ (id)objectWithArray:(NSArray *)array
+{
+    NSMutableArray *ret_Array = [NSMutableArray array];
+    [array enumerateObjectsUsingBlock:^(id dict, NSUInteger idx, BOOL *stop) {
+        if ([dict isKindOfClass:[NSDictionary class]]) {
+            id obj = [self objectWithDictionary:dict];
+            if (obj) [ret_Array addObject:obj];
+        } else {
+            [ret_Array removeAllObjects];
+            [ret_Array addObjectsFromArray:array];
+            *stop = YES;
+        }
+    }];
+    return ret_Array;
+}
+
++ (NSArray *)propertyNames
+{
     return [self propertyNamesUntilClass:[self class]];
 }
 
-+ (NSArray *)propertyNamesUntilClass:(Class)cls {
++ (NSArray *)propertyNamesUntilClass:(Class)cls
+{
     return [self propertyNamesUntilClass:cls usingBlock:nil];
 }
 
