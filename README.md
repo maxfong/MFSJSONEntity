@@ -33,7 +33,7 @@ git clone https://github.com/maxfong/MFSJSONEntity.git
 
 ```
 编辑Pofile
-pod 'MFSJSONEntity', '1.0.3'
+pod 'MFSJSONEntity', '1.0.1'
 ```
 
 ```
