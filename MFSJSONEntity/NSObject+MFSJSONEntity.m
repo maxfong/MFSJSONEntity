@@ -177,8 +177,11 @@
                 NSString *propertyType = nil;
                 char *propertyAttributeValue = property_copyAttributeValue(property, "T");
                 if ((propertyAttributeValue != NULL) && (propertyAttributeValue[0] == '@') && (strlen(propertyAttributeValue) >= 3)) {
-                    propertyType = [NSString stringWithCString:strndup(propertyAttributeValue+2, strlen(propertyAttributeValue)-3) encoding:NSUTF8StringEncoding];
+                    char *cString = strndup(propertyAttributeValue+2, strlen(propertyAttributeValue)-3);
+                    propertyType = [NSString stringWithCString:cString encoding:NSUTF8StringEncoding];
+                    free(cString);
                 }
+                free(propertyAttributeValue);
                 if (block) block(propertyName, propertyType);
             }
         }
