@@ -87,7 +87,11 @@
 {
     __block NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     
-    Class cls = [self class];
+    Class cls = Nil;
+    if ([((id<MFSJSONEntityPropertyProtocol>)self) respondsToSelector:@selector(ownPropertysUntilClass)]) {
+        cls = [((id<MFSJSONEntityPropertyProtocol>)self) ownPropertysUntilClass];
+    }
+    if (!cls) cls = [self class];
     [[self class] mfs_propertyNamesUntilClass:cls usingBlock:^(NSString *propertyName, NSString *propertyType) {
         id propertyValue = [self valueForKey:propertyName];
         if(propertyValue) {

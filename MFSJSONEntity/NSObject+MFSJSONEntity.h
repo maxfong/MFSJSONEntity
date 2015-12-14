@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "MFSJSONEntityElementProtocol.h"
+#import "MFSJSONEntityPropertyProtocol.h"
 
-@interface NSObject (MFSJSONEntity) <MFSJSONEntityElementProtocol>
+@interface NSObject (MFSJSONEntity) <MFSJSONEntityElementProtocol, MFSJSONEntityPropertyProtocol>
 
 /** 获取当前对象的属性集合 */
 - (NSDictionary *)mfs_propertyDictionary;

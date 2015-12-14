@@ -30,6 +30,7 @@
 		A91664071B6E0512004E142A /* MFSJSONEntity_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A91664061B6E0512004E142A /* MFSJSONEntity_Tests.m */; };
 		A91664081B6E0512004E142A /* MFSJSONEntity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A91663CA1B6E0250004E142A /* MFSJSONEntity.framework */; };
 		A91664111B6E0552004E142A /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = A91664101B6E0552004E142A /* Person.m */; };
+		A9CEA1461C1EA046005B2977 /* MFSJSONEntityPropertyProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A9CEA1451C1EA046005B2977 /* MFSJSONEntityPropertyProtocol.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		A91664061B6E0512004E142A /* MFSJSONEntity_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFSJSONEntity_Tests.m; sourceTree = "<group>"; };
 		A916640F1B6E0552004E142A /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		A91664101B6E0552004E142A /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		A9CEA1451C1EA046005B2977 /* MFSJSONEntityPropertyProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSJSONEntityPropertyProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				A91663CE1B6E0250004E142A /* MFSJSONEntity.h */,
 				A91663E31B6E0278004E142A /* MFSJSONEntityElementProtocol.h */,
+				A9CEA1451C1EA046005B2977 /* MFSJSONEntityPropertyProtocol.h */,
 				A91663E41B6E0278004E142A /* NSObject+JSONEntity.h */,
 				A91663E51B6E0278004E142A /* NSObject+JSONEntity.m */,
 				A91663E61B6E0278004E142A /* NSObject+MFSJSONEntity.h */,
@@ -153,6 +156,7 @@
 			files = (
 				A91663CF1B6E0250004E142A /* MFSJSONEntity.h in Headers */,
 				A91663E91B6E0278004E142A /* NSObject+JSONEntity.h in Headers */,
+				A9CEA1461C1EA046005B2977 /* MFSJSONEntityPropertyProtocol.h in Headers */,
 				A91663E81B6E0278004E142A /* MFSJSONEntityElementProtocol.h in Headers */,
 				A91663EB1B6E0278004E142A /* NSObject+MFSJSONEntity.h in Headers */,
 			);
@@ -203,7 +207,7 @@
 		A91663A81B6E0205004E142A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = MFS;
 				TargetAttributes = {
 					A91663C91B6E0250004E142A = {
@@ -319,6 +323,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -397,6 +402,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxfong.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -420,6 +426,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxfong.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -434,7 +441,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos8.3;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -442,7 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos8.3;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -467,6 +474,7 @@
 					XCTest,
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxfong.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
@@ -488,6 +496,7 @@
 					XCTest,
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maxfong.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -513,6 +522,7 @@
 				A91663DF1B6E0250004E142A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A91663FA1B6E0424004E142A /* Build configuration list for PBXAggregateTarget "lipoFramework" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +531,7 @@
 				A91663FC1B6E0424004E142A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A916640B1B6E0512004E142A /* Build configuration list for PBXNativeTarget "MFSJSONEntity Tests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +540,7 @@
 				A916640D1B6E0512004E142A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
