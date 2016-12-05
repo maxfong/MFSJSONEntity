@@ -135,7 +135,18 @@
 {
     __block NSMutableArray *propertyArray = [NSMutableArray array];
     if ([self isKindOfClass:[NSArray class]]) {
-        NSArray *array = [NSArray arrayWithArray:(NSArray *)self];
+        NSArray *array = nil;
+        @try {
+            array = [NSArray arrayWithArray:(NSArray *)self];
+        } @catch (NSException *exception) {
+            NSMutableArray *aArray = [NSMutableArray array];
+            for (id obj in (NSArray *)self) {
+                if (obj) { [aArray addObject:obj]; }
+            }
+            array = [NSArray arrayWithArray:aArray];
+        } @finally {
+            
+        }
         [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             id propertyValue = [self mfs_propertyValueWithObject:obj];
             if (propertyValue) [propertyArray addObject:propertyValue];
