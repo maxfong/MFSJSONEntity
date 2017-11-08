@@ -54,6 +54,14 @@
                 id propertyObject = cls ? [cls p_mfs_objectWithArray:propertyValue] : propertyValue;
                 [responseObject setValue:propertyObject forKey:propertyName];
             }
+            else if ([propertyValue isKindOfClass:[NSNumber class]]) {
+                if ([NSClassFromString(propertyType) isSubclassOfClass:[NSString class]]) {
+                    [responseObject setValue:((NSNumber *)propertyValue).stringValue forKey:propertyName];
+                }
+                else {
+                    [responseObject setValue:propertyValue forKey:propertyName];
+                }
+            }
             else if ([propertyValue isKindOfClass:[NSNull class]]) { }
             else {
                 [responseObject setValue:propertyValue forKey:propertyName];
