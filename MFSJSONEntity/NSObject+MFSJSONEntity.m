@@ -35,13 +35,16 @@
                 if (propertyClassName) {
                     Class cls = NSClassFromString(propertyClassName);
                     if ([cls isSubclassOfClass:[NSDictionary class]]) { propertyObject = propertyValue; }
+//                    else if ([cls isSubclassOfClass:[NSArray class]]) { }
                     else { propertyObject = cls ? [cls mfs_objectWithDictionary:propertyValue] : propertyValue; }
                 }
                 else {  //propertyType为nil代表类型可能是id
                     Class cls = NSClassFromString(propertyName);
                     propertyObject = cls ?[cls mfs_objectWithDictionary:propertyValue] : propertyValue;
                 }
-                [responseObject setValue:propertyObject forKey:propertyName];
+                if ([[propertyObject class] isSubclassOfClass:NSClassFromString(propertyType)]) {
+                    [responseObject setValue:propertyObject forKey:propertyName];
+                }
             }
             else if ([propertyValue isKindOfClass:[NSArray class]]) {
                 NSString *propertyClassName = nil;
@@ -52,7 +55,9 @@
                 propertyClassName = propertyClassName ?: propertyName;
                 Class cls = NSClassFromString(propertyClassName);
                 id propertyObject = cls ? [cls p_mfs_objectWithArray:propertyValue] : propertyValue;
-                [responseObject setValue:propertyObject forKey:propertyName];
+                if ([[propertyObject class] isSubclassOfClass:NSClassFromString(propertyType)]) {
+                    [responseObject setValue:propertyObject forKey:propertyName];
+                }
             }
             else if ([propertyValue isKindOfClass:[NSNumber class]]) {
                 if ([NSClassFromString(propertyType) isSubclassOfClass:[NSString class]]) {
@@ -62,10 +67,11 @@
                     [responseObject setValue:propertyValue forKey:propertyName];
                 }
             }
-            else if ([propertyValue isKindOfClass:[NSNull class]]) { }
-            else {
+            else if ([[propertyValue class] isSubclassOfClass:NSClassFromString(propertyType)]) {
                 [responseObject setValue:propertyValue forKey:propertyName];
             }
+            else if ([propertyValue isKindOfClass:[NSNull class]]) { }
+            else { }
         }
     }];
     return responseObject;
