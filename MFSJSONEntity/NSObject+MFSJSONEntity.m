@@ -34,13 +34,13 @@
                 propertyClassName = propertyClassName ?: propertyType;
                 if (propertyClassName) {
                     Class cls = NSClassFromString(propertyClassName);
-                    if ([cls isSubclassOfClass:[NSDictionary class]]) { propertyObject = propertyValue; }
+                    if ([cls isSubclassOfClass:[NSDictionary class]]) { propertyObject = [propertyValue mutableCopy]; }
 //                    else if ([cls isSubclassOfClass:[NSArray class]]) { }
                     else { propertyObject = cls ? [cls mfs_objectWithDictionary:propertyValue] : propertyValue; }
                 }
                 else {  //propertyType为nil代表类型可能是id
                     Class cls = NSClassFromString(propertyName);
-                    propertyObject = cls ?[cls mfs_objectWithDictionary:propertyValue] : propertyValue;
+                    propertyObject = cls ?[cls mfs_objectWithDictionary:propertyValue] : [propertyValue mutableCopy];
                 }
                 if ([[propertyObject class] isSubclassOfClass:NSClassFromString(propertyType)]) {
                     [responseObject setValue:propertyObject forKey:propertyName];
@@ -54,7 +54,7 @@
                 }
                 propertyClassName = propertyClassName ?: propertyName;
                 Class cls = NSClassFromString(propertyClassName);
-                id propertyObject = cls ? [cls p_mfs_objectWithArray:propertyValue] : propertyValue;
+                id propertyObject = cls ? [cls p_mfs_objectWithArray:propertyValue] : [propertyValue mutableCopy];
                 if ([[propertyObject class] isSubclassOfClass:NSClassFromString(propertyType)]) {
                     [responseObject setValue:propertyObject forKey:propertyName];
                 }
