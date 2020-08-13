@@ -22,11 +22,7 @@ let package = Package(
             name: "MFSJSONEntity",
             dependencies: [],
             path:"MFSJSONEntity",
-            sources:["Core"],
-            publicHeadersPath:"Headers",
-            cSettings:[
-                .headerSearchPath("Core")
-            ]
+            publicHeadersPath:""
         ),
         .testTarget(
             name: "MFSJSONEntityTests",
