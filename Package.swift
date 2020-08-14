@@ -21,8 +21,7 @@ let package = Package(
         .target(
             name: "MFSJSONEntity",
             dependencies: [],
-            path:"MFSJSONEntity",
-            publicHeadersPath:""
+            path:"MFSJSONEntity"
         ),
         .testTarget(
             name: "MFSJSONEntityTests",
