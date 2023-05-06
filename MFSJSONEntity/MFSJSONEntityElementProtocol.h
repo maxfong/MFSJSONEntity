@@ -17,4 +17,10 @@
  */
 + (NSDictionary *)replacedElementDictionary;
 
+
+/*  放弃array和dictionary属性的解析(解决数据需要透传的问题)
+ value: 属性名
+ */
++ (NSArray *)unparsedElements;
+
 @end
