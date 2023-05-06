@@ -32,15 +32,20 @@
                     propertyClassName = replacedDictionary[propertyName];
                 }
                 propertyClassName = propertyClassName ?: propertyType;
+                BOOL unparsed = NO;
+                if ([self respondsToSelector:@selector(unparsedElements)]) {
+                    NSArray *unparsedElements = [self performSelector:@selector(unparsedElements)];
+                    unparsed = [unparsedElements containsObject:propertyClassName];
+                }
                 if (propertyClassName) {
                     Class cls = NSClassFromString(propertyClassName);
                     if ([cls isSubclassOfClass:[NSDictionary class]]) { propertyObject = [propertyValue mutableCopy]; }
 //                    else if ([cls isSubclassOfClass:[NSArray class]]) { }
-                    else { propertyObject = cls ? [cls mfs_objectWithDictionary:propertyValue] : propertyValue; }
+                    else { propertyObject = (cls && !unparsed) ? [cls mfs_objectWithDictionary:propertyValue] : propertyValue; }
                 }
                 else {  //propertyType为nil代表类型可能是id
                     Class cls = NSClassFromString(propertyName);
-                    propertyObject = cls ?[cls mfs_objectWithDictionary:propertyValue] : [propertyValue mutableCopy];
+                    propertyObject = (cls && !unparsed) ?[cls mfs_objectWithDictionary:propertyValue] : [propertyValue mutableCopy];
                 }
                 if ([[propertyObject class] isSubclassOfClass:NSClassFromString(propertyType)]) {
                     [responseObject setValue:propertyObject forKey:propertyName];
@@ -53,8 +58,13 @@
                     propertyClassName = replacedDictionary[propertyName];
                 }
                 propertyClassName = propertyClassName ?: propertyName;
+                BOOL unparsed = NO;
+                if ([self respondsToSelector:@selector(unparsedElements)]) {
+                    NSArray *unparsedElements = [self performSelector:@selector(unparsedElements)];
+                    unparsed = [unparsedElements containsObject:propertyClassName];
+                }
                 Class cls = NSClassFromString(propertyClassName);
-                id propertyObject = cls ? [cls p_mfs_objectWithArray:propertyValue] : [propertyValue mutableCopy];
+                id propertyObject = (cls && !unparsed) ? [cls p_mfs_objectWithArray:propertyValue] : [propertyValue mutableCopy];
                 if ([[propertyObject class] isSubclassOfClass:NSClassFromString(propertyType)]) {
                     [responseObject setValue:propertyObject forKey:propertyName];
                 }
